@@ -1,0 +1,7 @@
+canvas {
+  border: 1px solid black;
+  max-height: 98vh;
+  max-width: 100%;
+  margin: auto;
+  display: block;
+}
