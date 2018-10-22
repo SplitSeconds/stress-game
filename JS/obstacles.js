@@ -1,12 +1,18 @@
-// function createObastacle() {
-//   this.height = Math.floor(minHeight + Math.random()*(maxHeight-minHeight+1));
-//   this.width = Math.floor(minWidth + Math.random()*(maxWidth-minWidth+1));
-//   this.x = 1200;
-//   this.y = height - this.height;
-//   this.draw = function() {
-//     ctx.fillRect(this.x, this.y, this.width, this.height)
-//   }
-// }
-
-// createObastacle[0].x-=1;
-// createObastacle[0].draw();
+class Obstacle {
+  constructor(ctx,width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.ctx = ctx;
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+  update() {
+    this.x -= 2
+  }
+  draw() {
+    this.ctx.fillRect(this.x,this.y,this.width, this.height)
+  }
+}
+  

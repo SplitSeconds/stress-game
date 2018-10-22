@@ -1,25 +1,16 @@
-var myGameArea = {
-  canvas : document.createElement("canvas"),
-  start : function() {
-      this.canvas.width = 480;
-      this.canvas.height = 270;
-      this.context = this.canvas.getContext("2d");
-      document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-  }
-}
-
 var canvas = document.querySelector('canvas')
 var ctx = canvas.getContext('2d')
 var width = canvas.width
 var height = canvas.height
 
-var gravity = 2
-var minHeight = 20;
-var maxHeight= 100;
-var minWidth = 10;
-var maxWidth = 20;
-var minGap = 200;
-var maxGap = 500;
+var gravity = 10
+// var minHeight = 20;
+// var maxHeight= 100;
+// var minWidth = 10;
+// var maxWidth = 20;
+// var minGap = 200;
+// var maxGap = 500;
+var frames = 0;
 
 var bg = new Background(this.ctx, '../img/BG.png', 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 0.3)
@@ -37,11 +28,17 @@ function startGame(){
     drawEverything()
   }, 1000/30)
 }
+
 function update() {
+  frames +=1;
   bg.update()
   bgCloud.update()
   bgCloudTwo.update()
   character.update()
+  for (var i = 0; i < obstacles.length; i++) {
+    obstacles[i].update()
+  }
+  // this.obstacles.createObstacle()
   //coffee.update()
 }
 
@@ -51,11 +48,12 @@ function drawEverything() {
   bgCloud.draw()
   bgCloudTwo.draw()
   character.draw()
+  for (var i = 0; i < obstacles.length; i++) {
+    obstacles[i].draw()
+  }
   //coffee.draw()
   //drawScore()
 }
-
-
 
 document.onkeydown = function(e) {
   switch (e.keyCode) {
@@ -79,3 +77,20 @@ document.onkeyup = function(e) {
 }
 
 startGame()
+
+function createObstacle () {
+  if (frames % 120 === 0) {
+    var x = 100;
+    var minHeight = 20;
+    var maxHeight = 200;
+    var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+    obstacles.push(new Obstacle(ctx, 10, height, "green", x, 650));
+  }
+  for (let i = 0; i < obstacles.length; i += 1) {
+    obstacles[i].x += -1;
+    obstacles[i].update();
+  }
+}
+
+var test = new Obstacle(ctx,50,100,"red", 100, 100)
+console.log('Obstacle', createObstacle())
