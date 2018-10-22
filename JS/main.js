@@ -4,18 +4,13 @@ var width = canvas.width
 var height = canvas.height
 
 var gravity = 10
-// var minHeight = 20;
-// var maxHeight= 100;
-// var minWidth = 10;
-// var maxWidth = 20;
-// var minGap = 200;
-// var maxGap = 500;
 var frames = 0;
 
 var bg = new Background(this.ctx, '../img/BG.png', 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 0.3)
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 1)
 var character = new Player(ctx, '../img/Tier.png')
+character.crashCheck();
 //var coffee = new Coffee(ctx, '../img/coffee.png')
 var obstacles = [];
 
@@ -29,6 +24,10 @@ function startGame(){
   }, 1000/30)
 }
 
+function stopGame(){
+  clearInterval(startGame);
+  }
+
 function update() {
   frames +=1;
   bg.update()
@@ -37,8 +36,16 @@ function update() {
   character.update()
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
+    var crashed = obstacles.some(function(obstacle) {
+      return character.crashWith(obstacle)
+    })
+    
+    if (crashed) {
+      console.log('crash');
+      stopGame();
+    }
+  
   }
-  // this.obstacles.createObstacle()
   //coffee.update()
 }
 
@@ -48,6 +55,7 @@ function drawEverything() {
   bgCloud.draw()
   bgCloudTwo.draw()
   character.draw()
+  createObstacle()
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].draw()
   }
@@ -76,15 +84,14 @@ document.onkeyup = function(e) {
   character.stopMove();
 }
 
-startGame()
 
 function createObstacle () {
   if (frames % 120 === 0) {
-    var x = 100;
-    var minHeight = 20;
-    var maxHeight = 200;
+    var x = 1200;
+    var minHeight = 100;
+    var maxHeight = 300;
     var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-    obstacles.push(new Obstacle(ctx, 10, height, "green", x, 650));
+    obstacles.push(new Obstacle(ctx, 20, height, "green", x, 700));
   }
   for (let i = 0; i < obstacles.length; i += 1) {
     obstacles[i].x += -1;
@@ -92,5 +99,13 @@ function createObstacle () {
   }
 }
 
-var test = new Obstacle(ctx,50,100,"red", 100, 100)
-console.log('Obstacle', createObstacle())
+var crashed = obstacles.some(function(obstacle) {
+  return character.crashWith(obstacle)
+})
+
+if (crashed) {
+  console.log('crash');
+  stopGame();
+}
+
+startGame()
