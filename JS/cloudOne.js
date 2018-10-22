@@ -5,7 +5,8 @@ class CloudTwo {
     this.speed = speed
     this.img = new Image()
     this.img.src = url
-    this.x = 0
+    this.x = 30
+    this.y = 500
     this.height = this.ctx.canvas.height / 4
     this.width = this.height*this.img.width/this.img.height
   }
