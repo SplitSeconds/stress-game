@@ -10,9 +10,10 @@ var bg = new Background(this.ctx, '../img/BG.png', 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 0.3)
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 1)
 var character = new Player(ctx, '../img/Tier.png')
-character.crashCheck();
+//character.crashWith();
 //var coffee = new Coffee(ctx, '../img/coffee.png')
 var obstacles = [];
+var coffeeCups = [];
 
 //onclick on the start button we call startGame()
 
@@ -28,6 +29,15 @@ function stopGame(){
   clearInterval(startGame);
   }
 
+function checkCollision(a,b) {
+  return !(
+    ((a.y + a.height) < (b.y)) ||
+    (a.y > (b.y + b.height)) ||
+    ((a.x + a.width) < b.x) ||
+    (a.x > (b.x + b.width))
+);
+}
+
 function update() {
   frames +=1;
   bg.update()
@@ -36,17 +46,15 @@ function update() {
   character.update()
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
-    var crashed = obstacles.some(function(obstacle) {
-      return character.crashWith(obstacle)
-    })
-    
-    if (crashed) {
-      console.log('crash');
-      stopGame();
-    }
-  
+    // checkCollision(character,obstacles[i])
+    //   if (checkCollision(character,obstacles[i]) === false) {
+    //     console.log('crash')
+    //     stopGame()
+    //   } 
   }
-  //coffee.update()
+  for (var j = 0; j < coffeeCups.length; j++) {
+    coffeeCups[j].update()
+  }
 }
 
 function drawEverything() {
@@ -56,10 +64,13 @@ function drawEverything() {
   bgCloudTwo.draw()
   character.draw()
   createObstacle()
+  createCoffee()
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].draw()
   }
-  //coffee.draw()
+  for (var j = 0; j < coffeeCups.length; j++) {
+    coffeeCups[j].draw()
+  }
   //drawScore()
 }
 
@@ -86,12 +97,16 @@ document.onkeyup = function(e) {
 
 
 function createObstacle () {
-  if (frames % 120 === 0) {
+  if (frames % 120 === 0) {  
     var x = 1200;
-    var minHeight = 100;
-    var maxHeight = 300;
+    var minHeight = 120;
+    var maxHeight = 190;
     var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-    obstacles.push(new Obstacle(ctx, 20, height, "green", x, 700));
+    minGap = 500;
+    maxGap = 550;
+    gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+    //obstacles.push(new Obstacle(ctx, 20, height, "green", x, 650));
+    obstacles.push(new Obstacle(ctx, 20, x - height - gap, "green", x, height + gap));
   }
   for (let i = 0; i < obstacles.length; i += 1) {
     obstacles[i].x += -1;
@@ -99,13 +114,14 @@ function createObstacle () {
   }
 }
 
-var crashed = obstacles.some(function(obstacle) {
-  return character.crashWith(obstacle)
-})
-
-if (crashed) {
-  console.log('crash');
-  stopGame();
+function createCoffee () {
+  if (frames % 190 === 0) {  
+    var x = 1200
+    coffeeCups.push(new Coffee(ctx, 100, 100, "red", x, 700)); 
+  }
+  for (let j = 0; j < coffeeCups.length; j += 1) {
+    coffeeCups[j].x += -1;
+    coffeeCups[j].update();
+  }
 }
-
-startGame()
+startGame();

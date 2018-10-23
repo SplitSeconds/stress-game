@@ -49,34 +49,34 @@ class Player {
     this.speedY = 0;
   }
 
-  crashLeft() {
-    this.left   = function() { return this.x                 };
-  }
+  // crashLeft() {
+  //   this.left   = function() { return this.x                 };
+  // }
   
-  crashRight() {
-    this.left   = function() { return this.x                 };
-  }
-  crashTop() {
-    this.top    = function() { return this.y                 };
-  }
-  crashBottom() {
-    this.bottom = function() { return this.y + (this.height) };
-  }
+  // crashRight() {
+  //   this.left   = function() { return this.x                 };
+  // }
+  // crashTop() {
+  //   this.top    = function() { return this.y                 };
+  // }
+  // crashBottom() {
+  //   this.bottom = function() { return this.y + (this.height) };
+  // }
 
-  // crashCheck() {
+  // crashCheck(){
   //   this.left   = function() { return this.x                 };
   //   this.right  = function() { return (this.x + this.width)  };
   //   this.top    = function() { return this.y                 };
   //   this.bottom = function() { return this.y + (this.height) };
-  
+  // }
+
+  // crashWith(obstacle) {
+  //   return !((this.bottom() < obstacle.top())    ||
+  //            (this.top()    > obstacle.bottom()) ||
+  //            (this.right()  < obstacle.left())   ||
+  //            (this.left()   > obstacle.right()))
   // }
   
-  crashWith (obstacle) {
-    return !((this.bottom() < obstacle.top())    ||
-             (this.top()    > obstacle.bottom()) ||
-             (this.right()  < obstacle.left())   ||
-             (this.left()   > obstacle.right()))
-  }
 
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y,150,150)
