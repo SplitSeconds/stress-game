@@ -15,6 +15,10 @@ class Background {
       this.x += this.width
     }
   }
+  stop(){
+    this.x = 0
+    
+  }
   draw() {
     for (var i = 0; this.x+i*this.width < this.ctx.canvas.width; i++) {
       this.ctx.drawImage(this.img,this.x+i*this.width,0,this.width,this.height)

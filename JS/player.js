@@ -12,6 +12,7 @@ class Player {
     this.vy = 2;
     this.speedX = 0;
     this.speedY = 0;
+    this.crash = true;
   }
 
   update(){
@@ -48,6 +49,8 @@ class Player {
     this.speedX = 0;
     this.speedY = 0;
   }
+
+
 
   // crashLeft() {
   //   this.left   = function() { return this.x                 };
