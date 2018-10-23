@@ -6,7 +6,7 @@ var height = canvas.height
 var debug = false
 
 var frames = 0;
-var lives = 3;
+var score = 0;
 
 var bg = new Background(this.ctx, '../img/BG.png', 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 0.3)
@@ -14,9 +14,8 @@ var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 1)
 var character = new Player(ctx, '../img/Tier.png', 150, 150)
 
 var obstacles = [];
-var coffeeCups = [];
+var coffees = [];
 var crash = true
-//var interval = setInterval(interval);
 
 //onclick on the start button we call startGame()
 
@@ -36,13 +35,13 @@ function stopGame(){
   }
 }
 
-function checkCollision(a,b) {
-  return !(
-    ((a.y + a.height) < (b.y)) ||
-    (a.y > (b.y + b.height)) ||
-    ((a.x + a.width) < b.x) ||
-    (a.x > (b.x + b.width))
-);}
+// function checkCollision(a,b) {
+//   return !(
+//     ((a.y + a.height) < (b.y)) ||
+//     (a.y > (b.y + b.height)) ||
+//     ((a.x + a.width) < b.x) ||
+//     (a.x > (b.x + b.width))
+// );}
 
 function update() {
   frames +=1;
@@ -53,24 +52,29 @@ function update() {
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
 
-    // checkCollision(obstacles[i], character)
-    //   if (checkCollision(obstacles[i], character) === false) {
-    //     stopGame()
-    //   } 
-
     for(var i = 0 ; i < obstacles.length ; i++){
       if(character.collide(obstacles[i])){
          stopGame()
          return;
       }
-
     }
-
   }
-  for (var j = 0; j < coffeeCups.length; j++) {
-    coffeeCups[j].update()
+  for (var j = 0; j < coffees.length; j++) {
+    coffees[j].update()
+    if(character.collide(coffees[j])){
+      console.log('coffee')
+      score = score + 10
+      coffees.splice(j, 1);
+      return;
+   }
   }
 }
+
+ctx.font = "50px sans-serif"
+function drawScore() {
+  ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
+}
+
 
 function drawEverything() {
   ctx.clearRect(0,0,width,height)
@@ -78,15 +82,15 @@ function drawEverything() {
   bgCloud.draw()
   bgCloudTwo.draw()
   character.draw()
+  drawScore()
   createObstacle()
   createCoffee()
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].draw()
   }
-  for (var j = 0; j < coffeeCups.length; j++) {
-    coffeeCups[j].draw()
+  for (var j = 0; j < coffees.length; j++) {
+    coffees[j].draw()
   }
-  //drawScore()
 }
 
 document.onkeydown = function(e) {
@@ -114,8 +118,7 @@ document.onkeyup = function(e) {
     case 39: // right
     character.stopMove();
     break;
-  }
-  
+  } 
 }
 
 
@@ -140,10 +143,10 @@ function createObstacle () {
 function createCoffee () {
   if (frames % 190 === 0) {  
     var x = 1200
-    coffeeCups.push(new Coffee(ctx, 100, 100, '../img/coffee.png', x, 700)); 
+    coffees.push(new Coffee(ctx, 100, 100, '../img/coffee.png', x, 700)); 
   }
-  for (let j = 0; j < coffeeCups.length; j += 1) {
-    coffeeCups[j].x += -1;
+  for (let j = 0; j < coffees.length; j += 1) {
+    coffees[j].x += -1;
     // coffeeCups[j].update();
   }
 }

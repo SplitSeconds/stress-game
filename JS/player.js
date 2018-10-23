@@ -71,6 +71,21 @@ class Player {
     }
     return crash;
   }
+  collide(coffee){
+    var myleft = this.x;
+    var myright = this.x + this.width;
+    var mytop = this.y;
+    var mybottom = this.y + this.height;
+    var otherleft = coffee.x;
+    var otherright = coffee.x + coffee.width;
+    var othertop = coffee.y;
+    var otherbottom = coffee.y + coffee.height;
+    var crash = true;
+    if (mybottom < othertop || mytop > otherbottom || myright < otherleft || myleft > otherright) {
+      crash = false;
+    }
+    return crash;
+  }
   
   draw() {
     this.ctx.save()
