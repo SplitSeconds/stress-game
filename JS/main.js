@@ -3,31 +3,32 @@ var ctx = canvas.getContext('2d')
 var width = canvas.width
 var height = canvas.height
 
-var gravity = 10
+var debug = false
+
 var frames = 0;
 var lives = 3;
-// var interval;
 
 var bg = new Background(this.ctx, '../img/BG.png', 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 0.3)
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 1)
-var character = new Player(ctx, '../img/Tier.png')
+var character = new Player(ctx, '../img/Tier.png', 150, 150)
 
 var obstacles = [];
 var coffeeCups = [];
 var crash = true
+//var interval = setInterval(interval);
 
 //onclick on the start button we call startGame()
 
 function startGame(){
-  setInterval(function() {
+  starting = setInterval(function() {
     update()
     drawEverything()
   }, 1000/30)
 }
 
 function stopGame(){
-  if(clearInterval(interval)){
+  if (clearInterval(starting)){
     console.log(stop);
     obstacles = [];
     bg.stop()
@@ -52,10 +53,18 @@ function update() {
   for (var i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
 
-    checkCollision(obstacles[i], character)
-      if (checkCollision(obstacles[i], character) === false) {
-        stopGame()
-      } 
+    // checkCollision(obstacles[i], character)
+    //   if (checkCollision(obstacles[i], character) === false) {
+    //     stopGame()
+    //   } 
+
+    for(var i = 0 ; i < obstacles.length ; i++){
+      if(character.collide(obstacles[i])){
+         stopGame()
+         return;
+      }
+
+    }
 
   }
   for (var j = 0; j < coffeeCups.length; j++) {
@@ -91,6 +100,7 @@ document.onkeydown = function(e) {
     character.moveRight();
     break;
     case 32:
+    case 38:
     console.log('jump');
     character.jump();
     break;
@@ -98,13 +108,20 @@ document.onkeydown = function(e) {
 } 
 
 document.onkeyup = function(e) {
-  character.stopMove();
+  console.log("keyup");
+  switch (e.keyCode) {
+    case 37: // left
+    case 39: // right
+    character.stopMove();
+    break;
+  }
+  
 }
 
 
 function createObstacle () {
   if (frames % 120 === 0) {  
-    var x = 1200;
+    var x = 1200
     var minHeight = 120;
     var maxHeight = 190;
     var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
@@ -127,7 +144,7 @@ function createCoffee () {
   }
   for (let j = 0; j < coffeeCups.length; j += 1) {
     coffeeCups[j].x += -1;
-    coffeeCups[j].update();
+    // coffeeCups[j].update();
   }
 }
 startGame();

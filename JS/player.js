@@ -13,18 +13,25 @@ class Player {
     this.speedX = 0;
     this.speedY = 0;
     this.crash = true;
+    this.nbOfJumps = 2
+
+    this.gravity = 3; // variables to dermine
+    this.jumpForce = 40; // variables to dermine
   }
 
   update(){
     this.x = this.x + this.speedX;
-    this.y = this.y + this.speedY + gravity;
+    this.y = this.y + this.speedY;
+    this.speedY += this.gravity;
 
+    // touch the ground
     if (this.y > 650) {
       this.y = 650
+      this.nbOfJumps = 2
     }
-    if (this.y < 450) {
-      this.y = this.y + (gravity * 2)
-    }
+    // if (this.y < 450) {
+    //   this.y = this.y + (gravity * 2)
+    // }
     if (this.x > 1100) {
       this.x = 1100
     }
@@ -34,55 +41,47 @@ class Player {
   }
   
   moveLeft(){
-    this.speedX -= 10;
+    this.speedX = -10;
   }
-
   moveRight(){
-    this.speedX += 10;
+    this.speedX = 10;
   }
-
   jump(){
-    this.speedY -= 20
+    if (this.nbOfJumps > 0) {
+      this.speedY = -this.jumpForce
+      this.nbOfJumps--
+    }
   }
-  
   stopMove(){
     this.speedX = 0;
-    this.speedY = 0;
+    // this.speedY = 0;
   }
-
-
-
-  // crashLeft() {
-  //   this.left   = function() { return this.x                 };
-  // }
+  collide(obstacle){
+    var myleft = this.x;
+    var myright = this.x + this.width;
+    var mytop = this.y;
+    var mybottom = this.y + this.height;
+    var otherleft = obstacle.x;
+    var otherright = obstacle.x + obstacle.width;
+    var othertop = obstacle.y;
+    var otherbottom = obstacle.y + obstacle.height;
+    var crash = true;
+    if (mybottom < othertop || mytop > otherbottom || myright < otherleft || myleft > otherright) {
+      crash = false;
+    }
+    return crash;
+  }
   
-  // crashRight() {
-  //   this.left   = function() { return this.x                 };
-  // }
-  // crashTop() {
-  //   this.top    = function() { return this.y                 };
-  // }
-  // crashBottom() {
-  //   this.bottom = function() { return this.y + (this.height) };
-  // }
-
-  // crashCheck(){
-  //   this.left   = function() { return this.x                 };
-  //   this.right  = function() { return (this.x + this.width)  };
-  //   this.top    = function() { return this.y                 };
-  //   this.bottom = function() { return this.y + (this.height) };
-  // }
-
-  // crashWith(obstacle) {
-  //   return !((this.bottom() < obstacle.top())    ||
-  //            (this.top()    > obstacle.bottom()) ||
-  //            (this.right()  < obstacle.left())   ||
-  //            (this.left()   > obstacle.right()))
-  // }
-  
-
   draw() {
-    this.ctx.drawImage(this.img, this.x, this.y,150,150)
+    this.ctx.save()
+    if (debug) {
+      this.ctx.fillStyle = "red"
+      this.ctx.globalAlpha = 0.5
+      this.ctx.fillRect(this.x, this.y, this.width, this.height)
+      this.ctx.globalAlpha = 1
+    }
+    this.ctx.drawImage(this.img, this.x-30, this.y-45, this.width+74, this.height+60)
+    this.ctx.restore()
   }
 
 }
