@@ -16,13 +16,6 @@ var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 1) //small cloud
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 0.7)
 var character = new Player(ctx, playImage, 150, 150)
 
-// ----------------------------->
-
-
-
-
-
-// ---------------------------------------->
 var obstacles = [];
 var coffees = [];
 var crash = true
@@ -96,7 +89,7 @@ function update() {
 
           stopGame()
           return;
-        }, 200)
+        }, 100)
       }
     }
   }
@@ -153,6 +146,13 @@ document.onkeydown = function(e) {
     console.log('jump');
     jumpSound = new sound("../sound/jump.wav");
     jumpSound.play();
+    playImage.src = "./img/jump.png"
+
+    // if (character.y < 649){
+    //   playImage.src = "./img/jump.png"
+    // } else if (character.y = 650){
+    //   playImage.src = "./img/Tier.png"
+    // }
     character.jump();
     break;
   }
@@ -164,6 +164,13 @@ document.onkeyup = function(e) {
     case 37: // left
     case 39: // right
     character.stopMove();
+    break;
+    case 32:
+    case 38:
+    console.log('stopjump');
+    setTimeout(()=> {
+      playImage.src = "./img/Tier.png"
+    }, 500)
     break;
   } 
 }
