@@ -36,6 +36,20 @@ function sound(src) {
 
 //onclick on the start button we call startGame()
 
+var $button = document.getElementById('button')
+$button.onclick = function(){
+  console.log("You klicked on the button")
+  // startGame();
+
+  // if(character.collide(obstacles[i])){
+  //   console.log(stop);
+  //   obstacles = [];
+  //   bg.stop()
+  //   this.frames = 0
+  // }
+  
+}
+
 function startGame(){
   starting = setInterval(function() {
     update()
@@ -63,6 +77,7 @@ function update() {
 
     for(var i = 0 ; i < obstacles.length ; i++){
       if(character.collide(obstacles[i])){
+         //character = character.drawImage(ctx, '../img/Autsch.png', 150, 150)
          crashSound = new sound("../sound/crash.wav");
          crashSound.play();
          stopGame()
@@ -84,15 +99,12 @@ function update() {
 }
 
 // Updating the score
-// ctx.font = "50px sans-serif"
+
 function drawScore() {
   //ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
   var $score = document.getElementById("scoreboard")
   $score.innerText = "Your score is " + score;
 }
-
-
-
 
 function drawEverything() {
   ctx.clearRect(0,0,width,height)
@@ -152,7 +164,8 @@ function createObstacle () {
     maxGap = 550;
     gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
     
-    obstacles.push(new Obstacle(ctx, 20, x - height - gap, "green", x, height + gap));
+    obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+   
   }
   for (let i = 0; i < obstacles.length; i += 1) {
     obstacles[i].x += -1;
@@ -163,11 +176,12 @@ function createObstacle () {
 function createCoffee () {
   if (frames % 190 === 0) {  
     var x = 1200
-    coffees.push(new Coffee(ctx, 100, 100, '../img/coffee.png', x, 700)); 
+    coffees.push(new Coffee(ctx, 100, 150, '../img/coffee.png', x, 650)); 
   }
   for (let j = 0; j < coffees.length; j += 1) {
     coffees[j].x += -1;
     //coffeeCups[j].update();
   }
 }
+
 startGame();

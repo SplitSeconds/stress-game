@@ -18,27 +18,31 @@ canvas {
   flex-direction: column;
   align-items: center;
 }
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 35vw;
+  margin: 10px;
 }
 #scoreboard {
-font-size: 30px;
+font-size: 45px;
 margin: 20px 0px;
 /* background-color:rgb(169,169,169, 0.5);
 border: 3px double black;
 border-radius: 5px; 
 padding: 9px; */
 }
+.instructions {
+  font-size: 20px;
+}
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'VT323', monospace;
-  font-size: 20px;
+  font-size: 25px;
   color: white;
   background-color:rgb(169,169,169, 0.5);
   border: 3px double black;

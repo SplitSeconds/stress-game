@@ -14,6 +14,12 @@ class Coffee {
     this.x -= 2
   }
   draw() {
+    if (debug) {
+      this.ctx.fillStyle = "red"
+      this.ctx.globalAlpha = 0.5
+      this.ctx.fillRect(this.x, this.y, this.width, this.height)
+      this.ctx.globalAlpha = 1
+    }
     //this.ctx.fillRect(this.img,this.x,this.y,this.width, this.height)
     this.ctx.drawImage(this.img,this.x,this.y,this.width,this.height)
   }
