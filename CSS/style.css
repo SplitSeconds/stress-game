@@ -6,13 +6,17 @@ body {
   flex-direction: row;
   justify-content: space-between;
 }
-
 canvas {
   border: 1px solid black;
   max-height: 98vh;
   max-width: 100%;
   margin: auto;
   display: block;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container {
@@ -21,6 +25,26 @@ canvas {
   align-items: center;
   justify-content: center;
 }
+#scoreboard {
+font-size: 30px;
+margin: 20px 0px;
+/* background-color:rgb(169,169,169, 0.5);
+border: 3px double black;
+border-radius: 5px; 
+padding: 9px; */
+}
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: white;
+  background-color:rgb(169,169,169, 0.5);
+  border: 3px double black;
+  /* border-radius: 5px; */
+  padding: 9px;
+  margin: 15px 15px 10px 15px;
+  height: 9vh;
+  width: 10vw;
 }

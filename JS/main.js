@@ -17,12 +17,29 @@ var obstacles = [];
 var coffees = [];
 var crash = true
 
+//Sounds 
+
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+      this.sound.play();
+  }
+  this.stop = function(){
+      this.sound.pause();
+  }
+}
+
 //onclick on the start button we call startGame()
 
 function startGame(){
   starting = setInterval(function() {
     update()
-    drawEverything()
+    drawEverything()  
   }, 1000/30)
 }
 
@@ -46,6 +63,8 @@ function update() {
 
     for(var i = 0 ; i < obstacles.length ; i++){
       if(character.collide(obstacles[i])){
+         crashSound = new sound("../sound/crash.wav");
+         crashSound.play();
          stopGame()
          return;
       }
@@ -55,6 +74,8 @@ function update() {
     coffees[j].update()
     if(character.collide(coffees[j])){
       console.log('coffee')
+      slurpSound = new sound("../sound/slurp.wav");
+      slurpSound.play();
       score = score + 10
       coffees .splice(j, 1);
       return;
@@ -63,13 +84,13 @@ function update() {
 }
 
 // Updating the score
-ctx.font = "50px sans-serif"
+// ctx.font = "50px sans-serif"
 function drawScore() {
-  ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
+  //ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
+  var $score = document.getElementById("scoreboard")
+  $score.innerText = "Your score is " + score;
 }
 
-var $score = document.getElementById("scoreboard")
-$score.innerText = "Your score is " + score
 
 
 
@@ -103,6 +124,8 @@ document.onkeydown = function(e) {
     case 32:
     case 38:
     console.log('jump');
+    jumpSound = new sound("../sound/jump.wav");
+    jumpSound.play();
     character.jump();
     break;
   }
