@@ -1,7 +1,5 @@
 body {
   font-family: 'VT323', monospace;
-  
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -12,6 +10,7 @@ canvas {
   max-width: 100%;
   margin: auto;
   display: block;
+  margin-top: 20px;
 }
 .header {
   display: flex;

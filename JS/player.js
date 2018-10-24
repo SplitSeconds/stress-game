@@ -1,8 +1,9 @@
 class Player {
-  constructor(ctx, url, width, height) {
+  constructor(ctx, img, width, height) {
     this.ctx = ctx;
-    this.img = new Image();
-    this.img.src = url;
+    this.img = img;
+    // this.img = new Image();
+    // this.img.src = url;
     this.score = 0;
     this.width = width;
     this.height = height;

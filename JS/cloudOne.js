@@ -13,12 +13,12 @@ class CloudOne {
   update() {
     this.x -= this.speed
     if (this.x < -this.width) {
-      this.x += this.width
+      this.x += this.width 
     }
   }
   draw() {
     for (var i = 0; this.x+i*this.width < this.ctx.canvas.width; i++) {
-      this.ctx.drawImage(this.img,this.x+i*this.width,0,this.width,this.height)
+      this.ctx.drawImage(this.img,this.x+i*this.width,20,this.width,this.height)
     }
   }
 }

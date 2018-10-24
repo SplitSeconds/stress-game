@@ -3,6 +3,9 @@ var ctx = canvas.getContext('2d')
 var width = canvas.width
 var height = canvas.height
 
+var playImage = new Image;
+playImage.src = "./img/Tier.png"
+
 var debug = false
 
 var frames = 0;
@@ -11,8 +14,15 @@ var score = 0;
 var bg = new Background(this.ctx, '../img/BG.png', 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 1) //small cloud
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 0.7)
-var character = new Player(ctx, '../img/Tier.png', 150, 150)
+var character = new Player(ctx, playImage, 150, 150)
 
+// ----------------------------->
+
+
+
+
+
+// ---------------------------------------->
 var obstacles = [];
 var coffees = [];
 var crash = true
@@ -39,16 +49,14 @@ function sound(src) {
 var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
-  // startGame();
+  startGame();
 
-  // if(character.collide(obstacles[i])){
-  //   console.log(stop);
-  //   obstacles = [];
-  //   bg.stop()
-  //   this.frames = 0
-  // }
-  
-}
+  for(var i = 0 ; i < obstacles.length ; i++){
+    if(character.collide(obstacles[i])){
+      stopGame();
+  }
+document.location.href=("");
+}}
 
 function startGame(){
   starting = setInterval(function() {
@@ -77,11 +85,18 @@ function update() {
 
     for(var i = 0 ; i < obstacles.length ; i++){
       if(character.collide(obstacles[i])){
-         //character = character.drawImage(ctx, '../img/Autsch.png', 150, 150)
          crashSound = new sound("../sound/crash.wav");
          crashSound.play();
-         stopGame()
-         return;
+        //  character = new Player(ctx, "../img/Autsch.png");
+        playImage.src = "./img/Autsch.png"
+         
+        setTimeout(()=> {
+          ctx.font = "120px VT323"
+          ctx.fillText("Game over!", canvas.width - 820, 400)
+
+          stopGame()
+          return;
+        }, 200)
       }
     }
   }
@@ -103,7 +118,7 @@ function update() {
 function drawScore() {
   //ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
   var $score = document.getElementById("scoreboard")
-  $score.innerText = "Your score is " + score;
+  $score.innerText = "Your score is " + score + "!";
 }
 
 function drawEverything() {
@@ -160,7 +175,7 @@ function createObstacle () {
     var minHeight = 120;
     var maxHeight = 190;
     var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-    minGap = 500;
+    minGap = 410;
     maxGap = 550;
     gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
     
@@ -183,5 +198,3 @@ function createCoffee () {
     //coffeeCups[j].update();
   }
 }
-
-startGame();
