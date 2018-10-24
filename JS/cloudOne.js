@@ -1,14 +1,14 @@
 
-class CloudTwo {
+class CloudOne {
   constructor(ctx, url, speed) {
     this.ctx = ctx
     this.speed = speed
     this.img = new Image()
     this.img.src = url
-    this.x = 30
-    this.y = 500
-    this.height = this.ctx.canvas.height / 4
-    this.width = this.height*this.img.width/this.img.height
+    this.x = 0
+    this.y = 0
+    this.height = 100;
+    this.width = 150;
   }
   update() {
     this.x -= this.speed

@@ -6,10 +6,35 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Canvas Background</title>
   <link rel="stylesheet" href="css/style.css">
+  <style type = "text/css">
+    @import url('https://fonts.googleapis.com/css?family=VT323');
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="header"></div>
+    <h1>The Stress Game</h1>
+    <div id="scoreboard">
+      Your Score is 
+    </div>
+    <div class="instructions">
+      <p>You're super stressed out by JavaScript. Jump over the obstacles and collect coffee mugs to stay awake.</p>
+      <div class="controls">
+        <ul>
+          <li><b>Move forward:</b> Arrow key right</li>
+          <li><b>Move backward:</b> Arrow key left</li>
+          <li><b>Jump:</b> Press space (you can only jump twice in a row)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="button">
+      <button>Start Game</button>
+    </div>
+  </div>
 
+<div class="canvas">
   <canvas width="1200" height="800"></canvas>
+</div>
   <script src="JS/coffee.js"></script>
   <script src="JS/player.js"></script>
   <script src="JS/obstacles.js"></script>

@@ -9,8 +9,8 @@ var frames = 0;
 var score = 0;
 
 var bg = new Background(this.ctx, '../img/BG.png', 2)
-var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 0.3)
-var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 1)
+var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 1) //small cloud
+var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 0.7)
 var character = new Player(ctx, '../img/Tier.png', 150, 150)
 
 var obstacles = [];
@@ -35,14 +35,6 @@ function stopGame(){
   }
 }
 
-// function checkCollision(a,b) {
-//   return !(
-//     ((a.y + a.height) < (b.y)) ||
-//     (a.y > (b.y + b.height)) ||
-//     ((a.x + a.width) < b.x) ||
-//     (a.x > (b.x + b.width))
-// );}
-
 function update() {
   frames +=1;
   bg.update()
@@ -64,16 +56,21 @@ function update() {
     if(character.collide(coffees[j])){
       console.log('coffee')
       score = score + 10
-      coffees.splice(j, 1);
+      coffees .splice(j, 1);
       return;
    }
   }
 }
 
+// Updating the score
 ctx.font = "50px sans-serif"
 function drawScore() {
   ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
 }
+
+var $score = document.getElementById("scoreboard")
+$score.innerText = "Your score is " + score
+
 
 
 function drawEverything() {
@@ -123,7 +120,7 @@ document.onkeyup = function(e) {
 
 
 function createObstacle () {
-  if (frames % 120 === 0) {  
+  if (frames % 140 === 0) {  
     var x = 1200
     var minHeight = 120;
     var maxHeight = 190;
@@ -147,7 +144,7 @@ function createCoffee () {
   }
   for (let j = 0; j < coffees.length; j += 1) {
     coffees[j].x += -1;
-    // coffeeCups[j].update();
+    //coffeeCups[j].update();
   }
 }
 startGame();
