@@ -15,9 +15,9 @@ var character = new Player(ctx, playImage, 150, 150)
 // BG.onload = function(){
 //     Background.draw();
 //     }
-//   BG.src = "../img/BG.png";
+//   BG.src = "img/BG.png";
 
-var bg = new Background(ctx, './img/bg.png', 2)
+var bg = new Background(ctx, 'img/bg.png', 2)
   
 //Images and global Variables  
 var bgCloud = new CloudOne(ctx, 'img/wolke1.png', 1) //small cloud
