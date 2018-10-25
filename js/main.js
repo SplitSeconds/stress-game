@@ -20,7 +20,7 @@ var character = new Player(ctx, playImage, 150, 150)
 var bg = new Background(ctx, '../img/bg.png', 2)
   
 //Images and global Variables  
-//var bgCloud = new CloudOne(ctx, '../img/wolke1.png', 1) //small cloud
+var bgCloud = new CloudOne(ctx, '../img/wolke1.png', 1) //small cloud
 var bgCloudTwo = new CloudTwo(ctx, '../img/wolke2.png', 0.7)
   
 let trashamount = 0;
