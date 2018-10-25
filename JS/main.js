@@ -3,33 +3,35 @@ var ctx = canvas.getContext('2d')
 var width = canvas.width
 var height = canvas.height
 
-let trashamount = 0;
-
-// img.onload = function (){
-//   var backgroundImg = new Image();
-//   backgroundImg.src = '../img/BG.png';
-// }
-
-var playImage = new Image;
-playImage.src = "./img/Tier.png"
-
+//Debug mode
 var debug = false
 
-var frames = 0;
-var score = 0;
+//Implement character image
+var playImage = new Image;
+playImage.src = "./img/Tier.png"
+var character = new Player(ctx, playImage, 150, 150)   
 
-var bg = new Background(this.ctx, '../img/BG.png', 2)
-//var bg = new Background(this.ctx, backgroudnImg, 2)
+// var BG = new Background();
+// BG.onload = function(){
+//     Background.draw();
+//     }
+//   BG.src = "../img/BG.png";
+
+var bg = new Background(ctx, '../img/BG.png', 2)
+  
+//Images and global Variables  
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 1) //small cloud
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 0.7)
-var character = new Player(ctx, playImage, 150, 150)
+  
+let trashamount = 0;
+var frames = 0;
+var score = 0;
 
 var obstacles = [];
 var coffees = [];
 var crash = true
 
 //Sounds 
-
 function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
@@ -46,7 +48,6 @@ function sound(src) {
 }
 
 //onclick on the start button we call startGame()
-
 var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
@@ -184,7 +185,31 @@ document.onkeyup = function(e) {
 }
 
 function createObstacle () {
-  if (trashamount >= 4 ) {
+  if (trashamount >= 10 ) {
+    if (frames % 30 === 0) {  
+      var x = 1200
+      var minHeight = 120;
+      var maxHeight = 190;
+      var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+      minGap = 430;
+      maxGap = 550;
+      gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      }
+    }
+  else if (trashamount >= 8 ) {
+    if (frames % 50 === 0) {  
+      var x = 1200
+      var minHeight = 120;
+      var maxHeight = 190;
+      var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+      minGap = 430;
+      maxGap = 550;
+      gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      }
+    }
+  else if (trashamount >= 4 ) {
     if (frames % 80 === 0) {  
       var x = 1200
       var minHeight = 120;
@@ -235,15 +260,17 @@ function createObstacle () {
     }
     }
   
-
-  
-
-
 function createCoffee () {
+  if (trashamount >= 8 ) {
+    if (frames % 80 === 0) {  
+      var x = 1200
+      coffees.push(new Coffee(ctx, 100, 150, '../img/coffee.png', x, 650)); 
+      }
+    }
   if (trashamount >= 4 ) {
     if (frames % 120 === 0) {  
       var x = 1200
-    coffees.push(new Coffee(ctx, 100, 150, '../img/coffee.png', x, 650)); 
+      coffees.push(new Coffee(ctx, 100, 150, '../img/coffee.png', x, 650)); 
     }
   }
   else if (trashamount < 4){
