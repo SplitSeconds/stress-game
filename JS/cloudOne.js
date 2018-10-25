@@ -11,7 +11,7 @@ class CloudOne {
     this.width = 150;
   }
   update() {
-    this.x -= this.speed
+    this.x -= this.speed + 0.3
     if (this.x < -this.width) {
       this.x += this.width 
     }

@@ -3,6 +3,13 @@ var ctx = canvas.getContext('2d')
 var width = canvas.width
 var height = canvas.height
 
+let trashamount = 0;
+
+// img.onload = function (){
+//   var backgroundImg = new Image();
+//   backgroundImg.src = '../img/BG.png';
+// }
+
 var playImage = new Image;
 playImage.src = "./img/Tier.png"
 
@@ -12,6 +19,7 @@ var frames = 0;
 var score = 0;
 
 var bg = new Background(this.ctx, '../img/BG.png', 2)
+//var bg = new Background(this.ctx, backgroudnImg, 2)
 var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 1) //small cloud
 var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 0.7)
 var character = new Player(ctx, playImage, 150, 150)
@@ -43,12 +51,11 @@ var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
   startGame();
-
   for(var i = 0 ; i < obstacles.length ; i++){
     if(character.collide(obstacles[i])){
       stopGame();
-  }
-document.location.href=("");
+    }
+  document.location.href=("");
 }}
 
 function startGame(){
@@ -69,6 +76,7 @@ function stopGame(){
 
 function update() {
   frames +=1;
+  console.log("frames",frames)
   bg.update()
   bgCloud.update()
   bgCloudTwo.update()
@@ -100,6 +108,7 @@ function update() {
       slurpSound = new sound("../sound/slurp.wav");
       slurpSound.play();
       score = score + 10
+      trashamount++;
       coffees .splice(j, 1);
       return;
    }
@@ -147,7 +156,6 @@ document.onkeydown = function(e) {
     jumpSound = new sound("../sound/jump.wav");
     jumpSound.play();
     playImage.src = "./img/jump.png"
-
     // if (character.y < 649){
     //   playImage.src = "./img/jump.png"
     // } else if (character.y = 650){
@@ -175,54 +183,84 @@ document.onkeyup = function(e) {
   } 
 }
 
-
 function createObstacle () {
-  if (frames % 160 === 0) {  
-    var x = 1200
-    var minHeight = 120;
-    var maxHeight = 190;
-    var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-    minGap = 430;
-    maxGap = 550;
-    gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-    obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+  if (trashamount >= 4 ) {
+    if (frames % 80 === 0) {  
+      var x = 1200
+      var minHeight = 120;
+      var maxHeight = 190;
+      var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+      minGap = 430;
+      maxGap = 550;
+      gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      }
+  }
+  else if (trashamount < 4){
+    if (frames % 160 === 0) {  
+      var x = 1200
+      var minHeight = 120;
+      var maxHeight = 190;
+      var height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+      minGap = 430;
+      maxGap = 550;
+      gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+    }
   }
   for (let i = 0; i < obstacles.length; i += 1) {
     obstacles[i].x += -1.5;
     obstacles[i].update();
 
-    // if (score <= 50){
-    //   obstacles[i].x += -3;
-    //   obstacles[i].update();
-    // } else if(score <=100){
-    //   obstacles[i].x += -4;
-    //   obstacles[i].update();
-    // } else if(score <=150){
-    //   obstacles[i].x += -6;
-    //   obstacles[i].update();
-    // } else {
-    //   obstacles[i].x += -8;
-    //   obstacles[i].update();
-    // }
-  }
-}
+    if (score >= 10 && score <= 30){     
+      obstacles[i].x += -3;
+      obstacles[i].update();
+      ctx.font = "50px VT323"
+      ctx.fillText("You reached level 2!", canvas.width - 450, 50)}
+    else if (score >= 30 && score <= 60){
+      obstacles[i].x += -6;
+      obstacles[i].update();
+      ctx.font = "50px VT323"
+      ctx.fillText("You reached level 3!", canvas.width - 450, 50)}
+    else if (score >= 60 && score <= 100){
+        obstacles[i].x += -10;
+        obstacles[i].update();
+        ctx.font = "50px VT323"
+        ctx.fillText("You reached level 4!", canvas.width - 450, 50)}
+    else if (score > 100){
+          obstacles[i].x += -10;
+          obstacles[i].update();
+          ctx.font = "50px VT323"
+          ctx.fillText("You reached level 5!", canvas.width - 450, 50)}
+    }
+    }
+  
+
+  
+
 
 function createCoffee () {
-  if (frames % 190 === 0) {  
-    var x = 1200
+  if (trashamount >= 4 ) {
+    if (frames % 120 === 0) {  
+      var x = 1200
     coffees.push(new Coffee(ctx, 100, 150, '../img/coffee.png', x, 650)); 
+    }
+  }
+  else if (trashamount < 4){
+    if (frames % 200 === 0) {  
+      var x = 1200
+    coffees.push(new Coffee(ctx, 100, 150, '../img/coffee.png', x, 650)); 
+    }
   }
   for (let j = 0; j < coffees.length; j += 1) {
     coffees[j].x += -1.5;
-    
-    // if (score <= 50){
-    //   coffees[j].x += -3;
-    // } else if(score <=100){
-    //   coffees[j].x += -4;
-    // } else if(score <=150){
-    //   coffees[j].x += -6;
-    // } else {
-    //   coffees[j].x += -8;
-    // }
-  }
+    if (score >= 10 && score <= 30){     
+      coffees[j].x += -3;}
+    else if (score >= 30 && score <= 60){
+      coffees[j].x += -6;}
+    else if (score >= 60 && score <= 100){
+      coffees[j].x += -10;}
+    else if (score > 100){
+      coffees[j].x += -10;}
+    }
 }

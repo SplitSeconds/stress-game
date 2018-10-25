@@ -21,7 +21,7 @@ class Obstacle {
       this.ctx.globalAlpha = 1
     }
 
-    this.ctx.drawImage(this.img,this.x-10,this.y,this.width+20,this.height)
+    this.ctx.drawImage(this.img,this.x-10,this.y,this.width,this.height)
   }
 }
 
