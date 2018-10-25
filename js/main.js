@@ -8,7 +8,7 @@ var debug = false
 
 //Implement character image
 var playImage = new Image;
-playImage.src = "./img/tier.png"
+playImage.src = "../img/tier.png"
 var character = new Player(ctx, playImage, 150, 150)   
 
 // var BG = new Background();
@@ -17,11 +17,11 @@ var character = new Player(ctx, playImage, 150, 150)
 //     }
 //   BG.src = "../img/BG.png";
 
-var bg = new Background(ctx, '../img/bg.png.png', 2)
+var bg = new Background(ctx, '../img/bg.png', 2)
   
 //Images and global Variables  
 var bgCloud = new CloudOne(ctx, '../img/wolke1.png', 1) //small cloud
-var bgCloudTwo = new CloudTwo(ctx, '../img/wolke2.png.png', 0.7)
+var bgCloudTwo = new CloudTwo(ctx, '../img/wolke2.png', 0.7)
   
 let trashamount = 0;
 var frames = 0;
