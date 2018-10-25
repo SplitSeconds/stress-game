@@ -77,7 +77,6 @@ function stopGame(){
 
 function update() {
   frames +=1;
-  console.log("frames",frames)
   bg.update()
   bgCloud.update()
   bgCloudTwo.update()
