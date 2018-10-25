@@ -8,7 +8,7 @@ var debug = false
 
 //Implement character image
 var playImage = new Image;
-playImage.src = "./img/Tier.png"
+playImage.src = "./img/tier.png"
 var character = new Player(ctx, playImage, 150, 150)   
 
 // var BG = new Background();
@@ -17,11 +17,11 @@ var character = new Player(ctx, playImage, 150, 150)
 //     }
 //   BG.src = "../img/BG.png";
 
-var bg = new Background(ctx, '../img/BG.png', 2)
+var bg = new Background(ctx, '../img/bg.png.png', 2)
   
 //Images and global Variables  
-var bgCloud = new CloudOne(ctx, '../img/Wolke1.png', 1) //small cloud
-var bgCloudTwo = new CloudTwo(ctx, '../img/Wolke2.png', 0.7)
+var bgCloud = new CloudOne(ctx, '../img/wolke1.png', 1) //small cloud
+var bgCloudTwo = new CloudTwo(ctx, '../img/wolke2.png.png', 0.7)
   
 let trashamount = 0;
 var frames = 0;
@@ -90,7 +90,7 @@ function update() {
          crashSound = new sound("../sound/crash.wav");
          crashSound.play();
         
-         playImage.src = "./img/Autsch.png"
+         playImage.src = "./img/autsch.png"
          
         setTimeout(()=> {
           ctx.font = "120px VT323"
@@ -178,7 +178,7 @@ document.onkeyup = function(e) {
     case 38:
     console.log('stopjump');
     setTimeout(()=> {
-      playImage.src = "./img/Tier.png"
+      playImage.src = "./img/tier.png"
     }, 500)
     break;
   } 
@@ -194,7 +194,7 @@ function createObstacle () {
       minGap = 430;
       maxGap = 550;
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/trashcan.png', x, height + gap)); 
       }
     }
   else if (trashamount >= 8 ) {
@@ -206,7 +206,7 @@ function createObstacle () {
       minGap = 430;
       maxGap = 550;
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/trashcan.png', x, height + gap)); 
       }
     }
   else if (trashamount >= 4 ) {
@@ -218,7 +218,7 @@ function createObstacle () {
       minGap = 430;
       maxGap = 550;
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/trashcan.png', x, height + gap)); 
       }
   }
   else if (trashamount < 4){
@@ -230,7 +230,7 @@ function createObstacle () {
       minGap = 430;
       maxGap = 550;
       gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-      obstacles.push(new Obstacle(ctx, 100, 150, '../img/Trashcan.png', x, height + gap)); 
+      obstacles.push(new Obstacle(ctx, 100, 150, '../img/trashcan.png', x, height + gap)); 
     }
   }
   for (let i = 0; i < obstacles.length; i += 1) {
