@@ -54,7 +54,7 @@ function sound(src) {
 var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
-  bgImage.onload = startGame();
+  bgImage.onload = startGame
   // function(){
     
   // };
