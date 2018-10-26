@@ -9,15 +9,18 @@ var debug = false
 //Implement character image
 var playImage = new Image;
 playImage.src = "img/tier.png"
-var character = new Player(ctx, playImage, 150, 150)   
+var character = new Player(ctx, playImage, 150, 150) 
 
-// var BG = new Background();
-// BG.onload = function(){
-//     Background.draw();
-//     }
-//   BG.src = "img/BG.png";
 
 var bg = new Background(ctx, 'img/bg.png', 2)
+
+// var bgImage = new Image();
+// bgImage.onload = function(){
+//     bg.src = this.src;   
+// };
+// bgImage.src = "img/bg.png'";
+
+// var bg = new Background(ctx, bgImage, 2)
   
 //Images and global Variables  
 var bgCloud = new CloudOne(ctx, 'img/wolke1.png', 1) //small cloud
