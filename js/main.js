@@ -11,16 +11,16 @@ var playImage = new Image;
 playImage.src = "img/tier.png"
 var character = new Player(ctx, playImage, 150, 150) 
 
+//Load background
+// var bg = new Background(ctx, 'img/bg.png', 2)
 
-var bg = new Background(ctx, 'img/bg.png', 2)
+var bgImage = new Image();
+bgImage.src = "img/bg.png"
 
-// var bgImage = new Image();
-// bgImage.onload = function(){
-//     bg.src = this.src;   
-// };
-// bgImage.src = "img/bg.png'";
 
-// var bg = new Background(ctx, bgImage, 2)
+
+
+var bg = new Background(ctx, bgImage, 2)
   
 //Images and global Variables  
 var bgCloud = new CloudOne(ctx, 'img/wolke1.png', 1) //small cloud
@@ -54,7 +54,9 @@ function sound(src) {
 var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
-  startGame();
+  bgImage.onload = function(){
+    startGame();
+  };
   for(var i = 0 ; i < obstacles.length ; i++){
     if(character.collide(obstacles[i])){
       stopGame();
@@ -119,7 +121,6 @@ function update() {
 }
 
 // Updating the score
-
 function drawScore() {
   //ctx.fillText("Your score: " + score, canvas.width - 1200, 50)
   var $score = document.getElementById("scoreboard")
