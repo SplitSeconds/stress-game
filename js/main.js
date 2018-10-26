@@ -15,7 +15,7 @@ var character = new Player(ctx, playImage, 150, 150)
 // var bg = new Background(ctx, 'img/bg.png', 2)
 
 var bgImage = new Image();
-bgImage.src = "https://github.com/SplitSeconds/stress-game/blob/master/img/bg.png"
+bgImage.src = "img/bg.png"
 
 
 
