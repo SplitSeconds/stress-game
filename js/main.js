@@ -183,7 +183,7 @@ document.onkeyup = function(e) {
 
 function createObstacle () {
   if (trashamount >= 10 ) {
-    if (frames % 30 === 0) {  
+    if (frames % 45 === 0) {  
       var x = 1200
       var minHeight = 120;
       var maxHeight = 190;
