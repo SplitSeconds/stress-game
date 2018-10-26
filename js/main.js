@@ -54,9 +54,10 @@ function sound(src) {
 var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
-  bgImage.onload = function(){
-    startGame();
-  };
+  bgImage.onload = startGame();
+  // function(){
+    
+  // };
   for(var i = 0 ; i < obstacles.length ; i++){
     if(character.collide(obstacles[i])){
       stopGame();
