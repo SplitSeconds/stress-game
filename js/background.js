@@ -16,6 +16,13 @@ class Background {
   stop(){
     this.x = 0
   }
+    /*
+  /  width() has to be a function because when you initially load the image
+  /  `this.img.width` and `this.img.height` are both 0
+  /  this leads to a division by 0 and width gets set to `NaN`
+  /
+  /  Another soluton could be to only set the width after the image has loaded
+  */
   width() {
     return this.height*this.img.width/this.img.height;
   }	  

@@ -234,22 +234,22 @@ function createObstacle () {
     obstacles[i].x += -1.5;
     obstacles[i].update();
 
-    if (score >= 10 && score <= 30){     
+    if (score >= 10 && score <= 40){     
       obstacles[i].x += -3;
       obstacles[i].update();
       ctx.font = "50px VT323"
       ctx.fillText("You reached level 2!", canvas.width - 450, 50)}
-    else if (score >= 30 && score <= 60){
+    else if (score >= 40 && score <= 80){
       obstacles[i].x += -6;
       obstacles[i].update();
       ctx.font = "50px VT323"
       ctx.fillText("You reached level 3!", canvas.width - 450, 50)}
-    else if (score >= 60 && score <= 100){
+    else if (score >= 100 && score <= 130){
         obstacles[i].x += -10;
         obstacles[i].update();
         ctx.font = "50px VT323"
         ctx.fillText("You reached level 4!", canvas.width - 450, 50)}
-    else if (score > 100){
+    else if (score > 130){
           obstacles[i].x += -10;
           obstacles[i].update();
           ctx.font = "50px VT323"
