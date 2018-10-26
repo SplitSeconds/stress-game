@@ -12,13 +12,10 @@ playImage.src = "img/tier.png"
 var character = new Player(ctx, playImage, 150, 150) 
 
 //Load background
-var bg = new Background(ctx, 'img/bg.png', 2)
 
-// var bgImage = new Image();
-// bgImage.src = "img/bg.png"
-// var bg = new Background(ctx, bgImage, 2)
-  
+
 //Images and global Variables  
+var bg = new Background(ctx, 'img/bg.png', 2)
 var bgCloud = new CloudOne(ctx, 'img/wolke1.png', 1) //small cloud
 var bgCloudTwo = new CloudTwo(ctx, 'img/wolke2.png', 0.7)
   
