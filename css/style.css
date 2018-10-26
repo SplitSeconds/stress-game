@@ -36,6 +36,9 @@ padding: 9px; */
 .instructions {
   font-size: 19px;
 }
+.note{
+  text-align: center;
+}
 .button {
   display: flex;
   align-items: center;
