@@ -12,15 +12,11 @@ playImage.src = "img/tier.png"
 var character = new Player(ctx, playImage, 150, 150) 
 
 //Load background
-// var bg = new Background(ctx, 'img/bg.png', 2)
+var bg = new Background(ctx, 'img/bg.png', 2)
 
-var bgImage = new Image();
-bgImage.src = "https://github.com/SplitSeconds/stress-game/blob/master/img/bg.png"
-
-
-
-
-var bg = new Background(ctx, bgImage, 2)
+// var bgImage = new Image();
+// bgImage.src = "img/bg.png"
+// var bg = new Background(ctx, bgImage, 2)
   
 //Images and global Variables  
 var bgCloud = new CloudOne(ctx, 'img/wolke1.png', 1) //small cloud
@@ -54,9 +50,10 @@ function sound(src) {
 var $button = document.getElementById('button')
 $button.onclick = function(){
   console.log("You klicked on the button")
-  bgImage.onload = function(){
-    startGame();
-  };
+  startGame();
+  // bgImage.onload = function(){
+  //   startGame();
+  // };
   for(var i = 0 ; i < obstacles.length ; i++){
     if(character.collide(obstacles[i])){
       stopGame();
